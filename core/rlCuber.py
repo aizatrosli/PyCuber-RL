@@ -16,7 +16,7 @@ class rlcuber(object):
         self.reset()
 
     def step(self,movement):
-        cube = self.cuber.cube_move(movement)
+        cube = self.cuber.cube_move(movementDict.get(self.diff)[movement])
         observation = self.cuber.cube_states()
         reward = 1 if self.cuber.cube_solved() else reward = 0
         done = True if reward > 0 else done = False
