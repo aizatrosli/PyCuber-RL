@@ -1,6 +1,5 @@
 import pycuber as pc
 from pycuber.solver import CFOPSolver
-import copy
 
 colourArr = {"[r]","[y]","[g]","[w]","[o]","[b]","[u]"}
 facesArr = {"B","D","L","F","R","U"}
