@@ -1,6 +1,6 @@
 import logging
 import random
-from utils import cubeparser
+from .utils import cubeparser
 
 movementDict = {1:["U","R","F","D","L","B"],
                 2:["U","R","F","D","L","B","U'","R'","F'","D'","L'","B'"],

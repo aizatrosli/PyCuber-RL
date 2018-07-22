@@ -75,5 +75,4 @@ class cubeparser(object):
         return self.cube(movement)
 
     def normal_solver(self):
-        solution = CFOPSolver(self.scramble_ref).solve(suppress_progress_messages=True)
-        return solution
+        return CFOPSolver(self.scramble_ref).solve(suppress_progress_messages=True)
