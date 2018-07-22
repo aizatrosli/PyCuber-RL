@@ -38,7 +38,7 @@ class rlcuber(object):
         return self.cuber.cube_states()
 
     def reset_same(self):
-        if self.scramble_arr > 0:
+        if len(self.scramble_arr) > 0:
             self.cuber = cubeparser()
             self.movementArr = []
             self.scramble_done = False
