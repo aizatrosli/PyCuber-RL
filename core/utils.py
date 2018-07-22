@@ -15,9 +15,9 @@ class cubeparser(object):
         self.cube = pc.Cube()
 
 
-    def face_converter(self, face, cube=self.cube):
+    def face_converter(self, face):
         #Convert pycuber colour array to normal colour array
-        face = cube.get_face(face)
+        face = self.cube.get_face(face)
         newface = []
         for srow in face:
             newrow = []
@@ -29,7 +29,7 @@ class cubeparser(object):
 
     def face_centre(self, face):
         #Return colour of centre face
-        face, _ = face_converter(face)
+        face, _ = self.face_converter(face)
         ccface = face[2][2]
         if ccface in colourArr:
             return ccface
@@ -39,8 +39,8 @@ class cubeparser(object):
 
     def face_solved(self, face):
         #Return boolean if face is solved
-        centre = face_centre(face)
-        face, _ = face_converter(face)
+        centre = self.face_centre(face)
+        face, _ = self.face_converter(face)
         for srow in face:
             for scubie in srow:
                 if not scubie in centre:
@@ -50,13 +50,13 @@ class cubeparser(object):
     def cube_solved(self):
         #Return boolean if cube is solved
         for face in facesArr:
-            if not face_solved(face):
+            if not self.face_solved(face):
                 return False
         return True
     def face_states(self, face):
         #Return value total colour correct on face
-        centre = face_centre(face)
-        face, _ = face_converter(face)
+        centre = self.face_centre(face)
+        face, _ = self.face_converter(face)
         state = 0
         for srow in face:
             for scubie in srow:
@@ -68,7 +68,7 @@ class cubeparser(object):
         #Return value total colour correct on each faces
         state = 0
         for face in facesArr:
-            state += face_states(face)
+            state += self.face_states(face)
         return state
 
     def render_colour(self):
