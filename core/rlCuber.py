@@ -34,9 +34,22 @@ class rlcuber(object):
         if scramble:
             self.scramble_done = False
             self.scramble_state, self.scramble_arr = self.scramble()
-            self.scramble_ref = self.cuber
             self.scramble_done = True
         return self.cuber.cube_states()
+
+    def reset_same(self):
+        if self.scramble_arr > 0:
+            self.cuber = cubeparser()
+            self.movementArr = []
+            self.scramble_done = False
+            for move in self.scramble_arr:
+                _o, _r, _d = self.step(move)
+            self.scramble_done = False
+        else:
+            self.reset()
+        return self.cuber.cube_states()
+
+
 
     def observation_spacen(self):
         return int(3*3*len(facesArr))
