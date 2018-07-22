@@ -1,12 +1,6 @@
 import pycuber as pc
 
-colourDict = {"red": "[r]",
-            "yellow": "[y]",
-            "green": "[g]",
-            "white": "[w]",
-            "orange": "[o]",
-            "blue": "[b]",
-            "unknown": "[u]"}
+colourArr = {"[r]","[y]","[g]","[w]","[o]","[b]","[u]"}
 
 facesArr = {"B","D","L","F","R","U"}
 
@@ -30,7 +24,7 @@ class cubeparser(object):
     def face_centre(self, face):
         #Return colour of centre face
         face, _ = self.face_converter(face)
-        ccface = face[2][2]
+        ccface = face[1][1]
         if ccface in colourArr:
             return ccface
         else:
@@ -57,7 +51,7 @@ class cubeparser(object):
         #Return value total colour correct on face
         centre = self.face_centre(face)
         face, _ = self.face_converter(face)
-        state = 0
+        state = -1
         for srow in face:
             for scubie in srow:
                 if  scubie in centre:
