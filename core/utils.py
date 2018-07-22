@@ -1,12 +1,15 @@
 import pycuber as pc
+from pycuber.solver import CFOPSolver
+import copy
 
 colourArr = {"[r]","[y]","[g]","[w]","[o]","[b]","[u]"}
-
 facesArr = {"B","D","L","F","R","U"}
+scramble_ref = ""
 
 class cubeparser(object):
     def __init__(self):
         self.cube = pc.Cube()
+        self.cube_ref = pc.Cube()
 
 
     def face_converter(self, face):
@@ -69,4 +72,9 @@ class cubeparser(object):
         return self.cube
 
     def cube_move(self,movement):
+        self.scramble_ref = self.cube_ref(movement)
         return self.cube(movement)
+
+    def normal_solver(self):
+        solution = CFOPSolver(self.scramble_ref).solve(suppress_progress_messages=True)
+        return solution
