@@ -2,7 +2,8 @@ import pycuber as pc
 from pycuber.solver import CFOPSolver
 
 colourArr = {"[r]","[y]","[g]","[w]","[o]","[b]","[u]"}
-facesArr = {"B","D","L","F","R","U"}
+facesArrOld = ["B","D","L","F","R","U"]
+facesArr = ["F","B","U","B","L","R"]
 scramble_ref = ""
 
 class cubeparser(object):
@@ -65,6 +66,13 @@ class cubeparser(object):
         state = 0
         for face in facesArr:
             state += self.face_states(face)
+        return state
+
+    def faces_states(self):
+        #Return value colour correct on face
+        state = []
+        for face in facesArr:
+            state.append(self.face_states(face))
         return state
 
     def render_colour(self):
