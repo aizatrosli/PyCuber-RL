@@ -13,7 +13,10 @@ facesArr = ["F","B","U","B","L","R"]
 class rlcuber(object):
     def __init__(self,difficulty=1):
         self.diff = difficulty
+        self.action_space = Space(int(len(movementDict.get(self.diff))))
+        self.observation_space = Space(int(3*3*len(facesArr))-6)
         self.reset()
+
 
     def step(self,movement,cube=False):
         move = movementDict.get(self.diff)[movement-1]
@@ -55,23 +58,12 @@ class rlcuber(object):
         else:
             return self.cuber.faces_states()
 
-    def action_spacesample(self):
-        return random.randint(0,self.action_spacen()-1)
-
-    def obeservation_spacesample(self):
-        return random.randint(0,self.observation_spacen())
-
-    def observation_spacen(self):
-        return int(3*3*len(facesArr))-6
-
-    def action_spacen(self):
-        return int(len(movementDict.get(self.diff)))
 
     def scramble(self):
-        observation = self.observation_spacen()
+        observation = self.observation_space.n
         scrambleArr = []
         while (observation > 0):
-            move = random.randint(0,self.action_spacen()-1)
+            move = random.randint(0,self.action_space.n-1)
             scrambleArr.append(move)
             observation, _r, _d = self.step(move,cube=True)
         return observation, scrambleArr
@@ -102,3 +94,10 @@ class rlcuber(object):
             return False
 
 
+class Space(object):
+    def __init__(self, n):
+        self.n = n
+    def sample(self):
+        return random.randint(0, self.n)
+    def __repr__(self):
+        return "Space(%d)" % self.n
